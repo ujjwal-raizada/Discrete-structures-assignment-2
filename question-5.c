@@ -3,6 +3,7 @@
 # define ll long long
 # define BYTE 8
 
+// Function to print binary repr.
 void printBin(char* bin, ll n) {
 	for (int i = 63 - n; i < 64; i++)
 		printf("%c", bin[i]);
@@ -10,9 +11,10 @@ void printBin(char* bin, ll n) {
 }
 
 
+// Function to convert long long to char array (Binary repr)
 char *numToBin(ll a) {
 	char *bin;
-	bin = (char*)calloc(1, 64);
+	bin = (char*)calloc(1, 64); // Size of long long is 64 bites
 	ll po = 63;
 	ll size = sizeof(a)*8;
 	ll p = 1;
@@ -46,9 +48,9 @@ struct node * newnode(char element)
 }
 
 struct node * buildTree(struct node * root, char* bin) {
-	//printf("Building Tree\n");
+
 	struct node * temp = root;
-	for (int i = 32; i < 64; i++) {
+	for (int i = 32; i < 64; i++) { // Iterating through the binary array
 		if (bin[i] == '1') {
 			if (temp -> right == NULL) {
 				struct node * New = newnode('1');
@@ -70,10 +72,11 @@ struct node * buildTree(struct node * root, char* bin) {
 			}
 		}
 	}
-	//printf("Built.\n");
+
 	return root;
 }
 
+// Worst Function to calc. power :P
 ll power(ll a, ll b) {
 	ll p = 1;
 	for (ll i = 0; i < b; i++)
@@ -81,6 +84,7 @@ ll power(ll a, ll b) {
 	return p;
 }
 
+// Function to find max xor possible
 ll findMax(struct node * root, char* bin) {
 	ll max_xor = 0;
 	ll p = power(2, 31);
@@ -134,7 +138,7 @@ int main() {
 		bin[i] = numToBin(a[i]);
 	}
 
-	struct node * root = newnode('2');
+	struct node * root = newnode('2'); // Random value just to connect trees starting with 1 or 0
 	for (int i = 0; i < n; i++)
 		root = buildTree(root, bin[i]);
 
